@@ -11,11 +11,61 @@
     <title>Hello, world!</title>
   </head>
   <body>
+
     <h1>Hello, world!</h1>
+    <input type="file" onchange="previewFile()"><br>
+    <img src="" height="200" alt="">
+<!--
+    <script>
+    $('#multi_file_upload').change(function(e) {
+    var file_id = e.target.id;
+
+    var file_name_arr = new Array();
+    var process_path = site_url + 'public/uploads/';
+
+    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
+
+        var form_data = new FormData();
+        var file_data = $("#" + file_id).prop("files")[i];
+        form_data.append("file_name", file_data);
+
+        if (check_multifile_logo($("#" + file_id).prop("files")[i]['name'])) {
+            $.ajax({
+                //url         :   site_url + "inc/upload_image.php?width=96&height=60&show_small=1",
+                url: site_url + "inc/upload_contact_info.php",
+                cache: false,
+                contentType: false,
+                processData: false,
+                async: false,
+                data: form_data,
+                type: 'post',
+                success: function(data) {
+                    // display image
+                }
+            });
+        } else {
+            $("#" + html_div).html('');
+            alert('We only accept JPG, JPEG, PNG, GIF and BMP files');
+        }
+
+    }
+});
+
+function check_multifile_logo(file) {
+    var extension = file.substr((file.lastIndexOf('.') + 1))
+    if (extension === 'jpg' || extension === 'jpeg' || extension === 'gif' || extension === 'png' || extension === 'bmp') {
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
+-->
+
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Upload Photo Here</h1>
+
             </div>
             <div class="col-12">
                 <h3>This is your photo</h3>
@@ -27,6 +77,25 @@
     </div>
 
     <!-- Optional JavaScript -->
+    <script>
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+
+  previewFile();  //calls the function named previewFile()
+  </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
